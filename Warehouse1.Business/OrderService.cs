@@ -7,9 +7,9 @@ namespace Warehouse1.Business
 {
     public class OrderService
     {
-        private readonly OrderRepo _orderRepo;
+        private readonly IOrderRepo _orderRepo;
 
-        public OrderService(OrderRepo orderRepo)
+        public OrderService(IOrderRepo orderRepo)
         {
             _orderRepo = orderRepo;
         }
@@ -25,7 +25,6 @@ namespace Warehouse1.Business
         }
         public Order CloseOrder(Order order)
         {
-
             var currentOrder = GetOrderById(order.Id);
 
             if (currentOrder == null)
@@ -38,11 +37,11 @@ namespace Warehouse1.Business
                 throw new Exception("Order already closed.");
             }
 
-            currentOrder.ClosedAt = order.ClosedAt;
+            currentOrder.ClosedAt = order.ClosedAt ?? DateTimeOffset.Now;
 
             _orderRepo.UpdateOrder(currentOrder);
 
-            return order;
+            return currentOrder;
         }
 
     }

@@ -2,11 +2,19 @@
 using System.Collections.Generic;
 using System.Data;
 using Warehouse1.Entities;
+using static Warehouse1.Data.OrderRepo;
 
 namespace Warehouse1.Data
-{   
+{
+    public interface IOrderRepo
+    {
+        Order GetOrderById(int id);
+        List<Order> GetOrders();
+        void UpdateOrder(Order order);
+    }
+
     //communicates with the Database
-    public class OrderRepo
+    public class OrderRepo : IOrderRepo
     {
         private readonly IDbConnection _db;
 
@@ -27,11 +35,9 @@ namespace Warehouse1.Data
             //Do not do this obviously
             return new Order
             {
-                Id = id,
                 Title = $"My Ticket {id}",
                 Description = "Blah",
                 CreatedAt = DateTimeOffset.Now.AddDays(-1),
-                ClosedAt = DateTimeOffset.Now.AddDays(-1)
             };
         }
 
