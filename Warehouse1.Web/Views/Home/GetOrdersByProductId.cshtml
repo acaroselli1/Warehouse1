@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "GetOrdersByProductId";
+}
+
+<h2>Get Orders By Product Id</h2>
+
+
+
+
+    
+      <ul>
+        <li style="margin:20px">
+            @ViewBag.Data.Id
+            @ViewBag.Data.ProductId
+            @ViewBag.Data.CreatedAt
+            @if (ViewBag.Data.ClosedAt == null)
+            {
+                <button class="btn btn-danger btn-xs">Process Order</button>
+            }
+        </li>
+    </ul>
+    

@@ -9,8 +9,10 @@ namespace Warehouse1.Data
     public interface IOrderRepo
     {
         Order GetOrderById(int id);
-        List<Order> GetOrders();
+        List<Order> GetAllUnprocessedOrders();
         void UpdateOrder(Order order);
+        Order CreateOrder(Order data);
+        Order GetOrdersByProductId(int productId);
     }
 
     //communicates with the Database
@@ -35,13 +37,26 @@ namespace Warehouse1.Data
             //Do not do this obviously
             return new Order
             {
-                Title = $"My Ticket {id}",
-                Description = "Blah",
+                Id = id,
                 CreatedAt = DateTimeOffset.Now.AddDays(-1),
+                ProductId = id + 10,
+                Description=$"Id#: {id}",
             };
         }
 
-        public List<Order> GetOrders()
+        public Order GetOrdersByProductId(int productId)
+        {
+            //Do not do this obviously
+            return new Order
+            {
+                Id = productId/10,
+                CreatedAt = DateTimeOffset.Now.AddDays(-1),
+                ProductId = productId,
+                Description = $"Product Id#: {productId}",
+            };
+        } 
+
+        public List<Order> GetAllUnprocessedOrders()
         {
             return new List<Order>
             {
@@ -49,6 +64,17 @@ namespace Warehouse1.Data
                 GetOrderById(2),
                 GetOrderById(3)
             };
+        }
+        public Order CreateOrder(Order data)
+        {
+            return new Order
+            {
+                CreatedAt = DateTimeOffset.Now,
+                ProductId = data.ProductId,
+                Id = data.Id,
+                Description = $"Id#: {data.Id}"
+            };
+
         }
     }
 }

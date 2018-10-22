@@ -16,12 +16,19 @@ namespace Warehouse1.Business
 
         public Order GetOrderById(int id)
         {
+
             return _orderRepo.GetOrderById(id);
         }
-       
-        public List<Order> GetAllOrders()
+
+
+        public Order GetOrdersByProductId(int productId)
         {
-            return _orderRepo.GetOrders();
+            return _orderRepo.GetOrdersByProductId(productId);
+        }
+
+        public List<Order> GetAllUnprocessedOrders()
+        {
+            return _orderRepo.GetAllUnprocessedOrders();
         }
         public Order CloseOrder(Order order)
         {
@@ -43,7 +50,11 @@ namespace Warehouse1.Business
 
             return currentOrder;
         }
-
+        public Order CreateOrder(Order data)
+        {
+            return _orderRepo.CreateOrder(data);
+;
+        }
     }
 
 
