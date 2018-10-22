@@ -14,6 +14,6 @@ namespace Warehouse1.Web.Models
 
         public string Description { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.Now;
     }
 }
