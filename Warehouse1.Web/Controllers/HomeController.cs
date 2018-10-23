@@ -60,11 +60,11 @@ namespace Warehouse1.Web.Controllers
             return View();
         }
 
-        [HttpPost("close")]
-        public IActionResult CloseOrder([FromBody]Order order)
+        [HttpPost("CloseOrder")]
+        public IActionResult CloseOrder([FromForm]Order order)
         {
             _orderService.CloseOrder(order);
-            return Ok();
+            return View();
         }
 
         [HttpGet]

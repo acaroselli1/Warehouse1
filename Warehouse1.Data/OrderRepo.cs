@@ -9,7 +9,7 @@ namespace Warehouse1.Data
     public interface IOrderRepo
     {
         Order GetOrderById(int id);
-        List<Order> GetAllUnprocessedOrders();
+        IEnumerable<Order> GetAllUnprocessedOrders();
         void UpdateOrder(Order order);
         Order CreateOrder(Order data);
         Order GetOrdersByProductId(int productId);
@@ -56,7 +56,7 @@ namespace Warehouse1.Data
             };
         } 
 
-        public List<Order> GetAllUnprocessedOrders()
+        public IEnumerable<Order> GetAllUnprocessedOrders()
         {
             return new List<Order>
             {

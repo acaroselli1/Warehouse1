@@ -1,23 +1,42 @@
-﻿
+﻿@model OrderModel
+
 @{
     ViewData["Title"] = "GetOrdersByProductId";
+
+
 }
 
-<h2>Get Orders By Product Id</h2>
+<script>
+    function orderClosed() {
+
+        document.getElementById("button").style.display = "none";
+    }
+</script>
+
+<h2>Orders By Product Id</h2>
 
 
 
 
-    
-      <ul>
-        <li style="margin:20px">
-            @ViewBag.Data.Id
-            @ViewBag.Data.ProductId
-            @ViewBag.Data.CreatedAt
+<ul>
+    <li style="margin:20px">
+        Id: @ViewBag.Data.Id
+        ProductId: @ViewBag.Data.ProductId
+        Created On:@ViewBag.Data.CreatedAt
+
+        @using (Html.BeginForm("CloseOrder", "Home", FormMethod.Post))
+        {
+            <input hidden value="@ViewBag.Data.Id" name="id" />
+            <input hidden value="@ViewBag.Data.CreatedAt" name="createdAt" />
+
             @if (ViewBag.Data.ClosedAt == null)
             {
-                <button class="btn btn-danger btn-xs">Process Order</button>
+                <button onclick="orderClosed()" class="btn btn-danger btn-xs" id="button" type="submit"> Process Order</button>
             }
-        </li>
-    </ul>
-    
+        }
+
+
+
+
+    </li>
+</ul>

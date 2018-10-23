@@ -28,7 +28,7 @@ namespace Warehouse1.Business
 
         public List<Order> GetAllUnprocessedOrders()
         {
-            return _orderRepo.GetAllUnprocessedOrders();
+            return (List<Order>)_orderRepo.GetAllUnprocessedOrders();
         }
         public Order CloseOrder(Order order)
         {

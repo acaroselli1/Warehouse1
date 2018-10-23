@@ -1,19 +1,105 @@
-﻿
-@{
+﻿@{
+
     ViewData["Title"] = "Open Orders";
+
 }
 
 <h2>Open Orders</h2>
+<script>
+    function orderClosed() {
 
+        document.getElementById("button").style.display = "none";
+    }
+</script>
 <ul>
     @foreach (var order in ViewBag.AllUnprocessedOrders)
     {
-    <li style="margin:20px">
-        @order.Id
-        @order.CreatedAt
-        @if (order.ClosedAt == null){
-        <button class="btn btn-danger btn-xs">Process Order</button>
-        }
-    </li>
+        <li style="margin:20px">
+            @order.Id
+            @order.CreatedAt
+
+
+
+            @using (Html.BeginForm("CloseOrder", "Home", FormMethod.Post))
+            {
+                <input hidden value="@order.Id" name="id" />
+                <input hidden value="@order.CreatedAt" name="createdAt" />
+
+                @if (order.ClosedAt == null)
+                {
+                    <button onclick="orderClosed()" class="btn btn-danger btn-xs" id="button" type="submit"> Process Order</button>
+                }
+            }
+        </li>
     }
-</ul>
+    </ ul >
+
+    @*@model IEnumerable<OrderModel>
+
+        @{
+            Layout = null;
+        }
+
+        <!DOCTYPE html>
+
+        <html>
+        <head>
+            <meta name="viewport" content="width=device-width" />
+            <title>Index</title>
+        </head>
+        <body>
+            <p>
+                <a asp-action="Create">Create New</a>
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ClosedAt)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ProductId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CreatedAt)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>*@
+    @*<tbody>
+            @foreach (var item in ViewBag.UnprocessedOrders)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClosedAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedAt)
+                    </td>
+                    <td>
+                        @Html.BeginForm("CloseOrder", "Home", item.Id, FormMethod.Post){
+                        <input hidden value="@item" name="id" />
+                        <button class="btn btn-danger btn-xs" type="submit">Process Order</button>
+                        }
+                    </td>
+                </tr>
+
+        </tbody>*@
+    @*</table>
+        </body>
+        </html>*@
