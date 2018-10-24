@@ -6,9 +6,8 @@
 
 <h2>Open Orders</h2>
 <script>
-    function orderClosed() {
-
-        document.getElementById("button").style.display = "none";
+    function orderClosed(orderId) {
+        document.getElementById(orderId).style.display = "none";
     }
 </script>
 <ul>
@@ -27,7 +26,7 @@
 
                 @if (order.ClosedAt == null)
                 {
-                    <button onclick="orderClosed()" class="btn btn-danger btn-xs" id="button" type="submit"> Process Order</button>
+                    <button onclick="orderClosed(@order.Id)" class="btn btn-danger btn-xs" id="@order.Id" type="submit"> Process Order</button>
                 }
             }
         </li>
